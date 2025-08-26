@@ -1,0 +1,57 @@
+class Node :
+    def __init__(self , item=None , next=None):
+        self.item = item
+        self.next = next
+
+class Queue :
+    def __init__ (self) :
+        self.front = None
+        self.rear = None
+        self.item_count = 0
+
+    def is_empty (self) :
+        return self.front is None
+    
+    def enqueue (self , data) :
+        n= Node(data)
+        if self.is_empty() :
+            self.front = n
+        else :
+            self.rear.next = n
+        
+        self.rear = n
+        self.item_count +=1
+
+    def dequeue (self) :
+        if self.is_empty() :
+            raise IndexError("Empty Queue")
+        elif self.front == self.rear :
+            self.front = None
+            self.rear = None
+        else :
+            self.front = self.front.next
+        self.item_count -=1
+
+    def get_front (self) :
+        if self.is_empty() :
+            raise IndexError("No data in the Queue")
+        else :
+            return self.front.item
+        
+    def get_rear (self) :
+        if self.is_empty() :
+            raise IndexError("No data in the Queue")
+        else :
+            return self.rear.item
+        
+    def size (self) :
+        return self.item_count
+    
+
+q1 = Queue()
+q1.enqueue(1)
+q1.enqueue(2)
+q1.enqueue(3)
+print(f"front value : {q1.get_front()} , rear value : {q1.get_rear()}")
+q1.dequeue()
+print(f"After dequeued : front value : {q1.get_front()} , rear value : {q1.get_rear()}")
